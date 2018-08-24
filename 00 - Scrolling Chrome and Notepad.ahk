@@ -7,36 +7,25 @@
 
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 Menu, Tray, Tip, Mousewheel tab scroll for Chrome and Notepad++
+;************************************************************************************************************************************
+;************************************************************************************************************************************
+;****** This lets you use the mouse wheel to scroll through tabs in Firefox, Chrome, and Notepad++
+;****** Similar to how it worked in ubuntu for a while
+;************************************************************************************************************************************
+;************************************************************************************************************************************
 
-/*; -------------------------Script Controls----------------------------
-^!Numpad0::   ;reloads script, displays tooltip
-      TrayTip   ,-Reloading-, %A_ScriptName%, 2, 16
-      sleep 2000
-      HideTrayTip ()
-    Reload
-  Return
-!NumpadSub::  ;kills script, displays tooltip
-    TrayTip , Attempting to -KILL-, %A_ScriptName%, 3 , 16
-    sleep (2500)
-    HideTrayTip ()
-    ExitApp
-  Return
-^Numpad0::num=0 ;reset Extension to beginning of script
-; --------------------------------------------------------------------
-; --------------------------------------------------------------------
-*/
 ;-----info gathering function
 	relInfo()
 		{
 			global ;makes all variables global
-			
+
 			CoordMode, Mouse, Relative
 			MouseGetPos, relXpos, relYpos, id
 		}
 	absInfo()
 		{
 			global ;makes all variables global
-			
+
 			CoordMode, Mouse, Screen
 			MouseGetPos, absXpos, absYpos, id
 		}
@@ -44,10 +33,10 @@ Menu, Tray, Tip, Mousewheel tab scroll for Chrome and Notepad++
 	info()
 		{
 			global ;makes all variables called, or made, global
-			
+
 			relInfo()
 			absInfo()
-			WinGetClass, class, ahk_id %id%	
+			WinGetClass, class, ahk_id %id%
 		}
 
 
@@ -73,7 +62,7 @@ info()
 			IfWinNotActive ahk_id %id%
 				WinActivate ahk_id %id%
 				info()
-				
+
 			If (relYpos > 77 and relYpos < 107)
 				{
 					If A_ThisHotkey = WheelUp
@@ -90,7 +79,7 @@ info()
 				}
 		}
 
-		
+
 ;-----checking main screen and one custom screen for chrome
     If (absYpos < 33 and InStr(class,"MozillaWindowClass"))	;checks main screen for firefox
 		{
@@ -100,11 +89,11 @@ info()
 				Send ^{PgUp}
 			Else
 				Send ^{PgDn}
-		}		
-	
+		}
 
-	
-;-----sending normal scroll action	
+
+
+;-----sending normal scroll action
     Else
     {
         If A_ThisHotkey = WheelUp
@@ -119,9 +108,9 @@ Return
 NumpadEnter::
 	;CoordMode, Mouse, Screen
 	MouseGetPos, absXpos, absYpos, id
-	WinGetClass, class, ahk_id %id%	
+	WinGetClass, class, ahk_id %id%
 	WinGetClass, class, A
-	
+
 	if (InStr(class, "MozillaWindowClass"))
 	{
 		MsgBox, The active window's class is "%class%".
@@ -131,3 +120,21 @@ NumpadEnter::
 		MsgBox You failed, but this is the class: %class%
 	}
 Return	*/
+
+/*; -------------------------Script Controls----------------------------
+^!Numpad0::   ;reloads script, displays tooltip
+      TrayTip   ,-Reloading-, %A_ScriptName%, 2, 16
+      sleep 2000
+      HideTrayTip ()
+    Reload
+  Return
+!NumpadSub::  ;kills script, displays tooltip
+    TrayTip , Attempting to -KILL-, %A_ScriptName%, 3 , 16
+    sleep (2500)
+    HideTrayTip ()
+    ExitApp
+  Return
+^Numpad0::num=0 ;reset Extension to beginning of script
+; --------------------------------------------------------------------
+; --------------------------------------------------------------------
+*/
