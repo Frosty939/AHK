@@ -1,0 +1,3 @@
+
+# Toggle Left Click from Pressing LControl
+	$~LControl::Click % GetKeyState("LButton") ? "Up" : "Down"
