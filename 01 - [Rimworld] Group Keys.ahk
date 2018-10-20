@@ -1,9 +1,6 @@
 ﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 #Warn   ; Enable warnings to assist with detecting common errors.
 #SingleInstance force   ; Determines whether a script is allowed to run again when it is already running.
-#UseHook Off    ; Using the keyboard hook is usually preferred for hotkeys - but here we only need the mouse hook.
-#InstallMouseHook
-#MaxHotkeysPerInterval 1000 ; Avoids warning messages for high speed wheel users.
 
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
@@ -36,56 +33,87 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 		}
 
 ;================================================
-;===== Opening Log ==============================
-$F4::
+;===== Switching Numpad and Normal Numbers=======
+$1::
 	info() ;pulling in active window info
 ;-----checking for NMS
-	If (InStr(class,"GLFW30"))
-		Send p
+	If (InStr(class,"UnityWndClass"))
+		Send {Numpad1}
 	Else
-		Send {F4}
-Return
-;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-;================================================
-;===== Fixing Scroll Direction ==================
-$WheelUp::
+		Send 1
+Return		
+
+$2::
 	info() ;pulling in active window info
 ;-----checking for NMS
-	If (InStr(class,"GLFW30"))
-		Send {WheelDown}
+	If (InStr(class,"UnityWndClass"))
+		Send {Numpad2}
 	Else
-		Send {WheelUp}	
+		Send 2
 Return
 
-
-$WheelDown::
+$3::
 	info() ;pulling in active window info
 ;-----checking for NMS
-	If (InStr(class,"GLFW30"))
-		Send {WheelUp}
+	If (InStr(class,"UnityWndClass"))
+		Send {Numpad3}
 	Else
-		Send {WheelDown}	
+		Send 3
 Return
-;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-;================================================
-;===== Toggle Left Click ========================
-$F5::
+
+$4::
 	info() ;pulling in active window info
-;-----Checking for NMS
-	If (InStr(class,"GLFW30"))
-		Click % GetKeyState("LButton") ? "Up" : "Down"
+;-----checking for NMS
+	If (InStr(class,"UnityWndClass"))
+		Send {Numpad4}
 	Else
-		Send {F5}
+		Send 4
 Return
-;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+$5::
+	info() ;pulling in active window info
+;-----checking for NMS
+	If (InStr(class,"UnityWndClass"))
+		Send {Numpad5}
+	Else
+		Send 5
+Return
 
+$6::
+	info() ;pulling in active window info
+;-----checking for NMS
+	If (InStr(class,"UnityWndClass"))
+		Send {Numpad6}
+	Else
+		Send 6
+Return
 
+$7::
+	info() ;pulling in active window info
+;-----checking for NMS
+	If (InStr(class,"UnityWndClass"))
+		Send {Numpad7}
+	Else
+		Send 7
+Return
 
+$8::
+	info() ;pulling in active window info
+;-----checking for NMS
+	If (InStr(class,"UnityWndClass"))
+		Send {Numpad8}
+	Else
+		Send 8
+Return
 
-
-
-
+$9::
+	info() ;pulling in active window info
+;-----checking for NMS
+	If (InStr(class,"UnityWndClass"))
+		Send {Numpad9}
+	Else
+		Send 9
+ReturN
 
 
 ; -------------------------Script Controls----------------------------

@@ -3,20 +3,6 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-
-; -------------------------Loot Crates---------------------------- 
-Numpad0::
-	Click, 642, 583
-	Sleep 500
-	Click, 1112, 801
-Return
-
-NumpadDot::
-	Click, 642, 583
-	Sleep 500
-	Click, 1107, 705
-Return
-	
 ; -------------------------Window Info Gathering---------------------------- 
 	relInfo()
 		{
@@ -41,36 +27,49 @@ Return
 			absInfo()
 			WinGetClass, class, ahk_id %id%
 		}
-	
-	
-; -------------------------Collection Pos Info----------------------------
-NumpadEnter::
-	info()
+;================================================================================
 
-	CoordMode, Mouse, Screen
-	MouseGetPos, absXpos, absYpos
-	;MsgBox 
+SetTimer Click, 20
+
+$F1::
+	info()
 	
-	CoordMode, Mouse, Relative
-	MouseGetPos, relXpos, relYpos
-	MsgBox Relative X=%relXpos%    Relatvie Y=%relYpos%`nScreen X=%absXpos%    Screen Y=%absYpos%`nWindow Class=%class%
+	If (InStr(class,"UnityWndClass"))
+		{
+			Send % "{Click " . ( GetKeyState("LButton") ? "Up}" : "Down}" )
+		}
+	Else
+		Send {F1}
 Return
 
-; --------------------------------------------------------------------
+$F4::CToggle := !CToggle
+	info()
+	
+	If (InStr(class,"UnityWndClass"))
+		{
+			Click:
+				If (!CToggle)
+			Return
+				click, right
+			Return
+		}
+	Else
+		Send {F4}
+Return
 ; -------------------------Script Controls----------------------------
-; --------------------------------------------------------------------
 ^!Numpad0::   ;reloads script, displays tooltip
-      ;TrayTip   ,-Reloading-, %A_ScriptName%, 2, 16
-      ;sleep 2000
-      ;HideTrayTip ()
+      TrayTip   ,-Reloading-, %A_ScriptName%, 2, 16
+      sleep 2000
+      HideTrayTip ()
     Reload
   Return
 !NumpadSub::  ;kills script, displays tooltip
-    ;TrayTip , Attempting to -KILL-, %A_ScriptName%, 3 , 16
-    ;sleep (2500)
-    ;HideTrayTip ()
+    TrayTip , Attempting to -KILL-, %A_ScriptName%, 3 , 16
+    sleep (2500)
+    HideTrayTip ()
     ExitApp
   Return
 ^Numpad0::num=0 ;reset Extension to beginning of script
 ; --------------------------------------------------------------------
 ; --------------------------------------------------------------------
+

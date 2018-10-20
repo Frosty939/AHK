@@ -28,8 +28,9 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 	s::down
 	d::right
 	w::up
-	XButton1::NumpadSub
-	XButton2::NumpadAdd
-	Space::Enter
+	
+	; XButton1::NumpadSub
+	; XButton2::NumpadAdd
+	; Space::Enter					;Makes Space=Enter(next turn)
 
 ;end of script
