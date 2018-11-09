@@ -11,6 +11,11 @@ Menu, Tray, Tip, Mousewheel tab scroll for Chrome and Notepad++
 ;************************************************************************************************************************************
 ;****** This lets you use the mouse wheel to scroll through tabs in Firefox, Chrome, and Notepad++
 ;****** Similar to how it worked in ubuntu for a while
+;******************************************************************************************
+;************************ TODO ************
+;						* clean up formating
+;						* add Atom use
+;						* fix chrome setup
 ;************************************************************************************************************************************
 ;************************************************************************************************************************************
 
@@ -47,7 +52,7 @@ WheelDown::
 info()
 
 ;-----checking main screen and one custom screen for chrome
-    If (absYpos < 33 and InStr(class,"Chrome_WidgetWin") or absXpos < 0 and absYpos < 250 and InStr(class,"Chrome_WidgetWin"))	;checks main screen for chrome
+    If (absYpos < 33 and InStr(class,"Chrome_WidgetWin") or absXpos < 0 and absYpos < 250 and InStr(class,"Chrome_WidgetWin"))
 		{
 			IfWinNotActive ahk_id %id%
 				WinActivate ahk_id %id%
@@ -61,7 +66,7 @@ info()
 		{
 			IfWinNotActive ahk_id %id%
 				WinActivate ahk_id %id%
-				info()
+			;	info()
 
 			If (relYpos > 77 and relYpos < 107)
 				{
@@ -78,21 +83,27 @@ info()
 						Send {WheelDown}
 				}
 		}
-
-
-;-----checking main screen and one custom screen for chrome
-    If (absYpos < 33 and InStr(class,"MozillaWindowClass"))	;checks main screen for firefox
+;-----checking main screen and one custom screen for firefox
+    If (InStr(class,"MozillaWindowClass"))	;checks main screen for firefox
 		{
 			IfWinNotActive ahk_id %id%
 				WinActivate ahk_id %id%
-			If A_ThisHotkey = WheelUp
-				Send ^{PgUp}
+				
+			If (relYpos > 7 and relYpos < 42)
+				{
+				If A_ThisHotkey = WheelUp
+					Send ^{PgUp}
+				Else
+					Send ^{PgDn}
+				}
 			Else
-				Send ^{PgDn}
+				{
+				If A_ThisHotkey = WheelUp
+					Send {WheelUp}
+				Else
+					Send {WheelDown}
+				}
 		}
-
-
-
 ;-----sending normal scroll action
     Else
     {
@@ -102,6 +113,13 @@ info()
             Send {WheelDown}
     }
 Return
+
+;###################################################################################
+;######WARNING######WARNING######WARNING######WARNING######WARNING######WARNING#####
+;###################################################################################
+;#
+;# REMEBER THAT KEYBOARD HOOKS ARE DISABLED
+;# and must re-enable if you want to use these
 
 ;------------Testing for active window class------------------------
 /*
@@ -121,6 +139,20 @@ NumpadEnter::
 	}
 Return	*/
 
+/*; --------------------------------------------------------------------
+NumpadEnter::
+	info()
+	
+	CoordMode, Mouse, Screen
+	MouseGetPos, absXpos, absYpos
+	;MsgBox 
+	
+	CoordMode, Mouse, Relative
+	MouseGetPos, relXpos, relYpos
+	
+	MsgBox Relative X=%relXpos%    Relatvie Y=%relYpos%`nScreen X=%absXpos%    Screen Y=%absYpos%`nWindow Class=%class%
+Return
+*/
 /*; -------------------------Script Controls----------------------------
 ^!Numpad0::   ;reloads script, displays tooltip
       TrayTip   ,-Reloading-, %A_ScriptName%, 2, 16
