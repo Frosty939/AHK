@@ -3,8 +3,15 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
+; ------------------------- Stuff.. ---------------------------- 
+Numpad0::
+	send ^v{home}{del}{end}{backspace}
+return
 
-; -------------------------Loot Crates---------------------------- 
+; -------------------------------------------------------------
+
+
+/*; -------------------------Loot Crates---------------------------- 
 Numpad0::
 	Click, 642, 583
 	Sleep 500
@@ -16,7 +23,7 @@ NumpadDot::
 	Sleep 500
 	Click, 1107, 705
 Return
-	
+	*/
 ; -------------------------Window Info Gathering---------------------------- 
 	relInfo()
 		{
@@ -43,7 +50,7 @@ Return
 		}
 	
 	
-; -------------------------Collection Pos Info----------------------------
+/*; -------------------------Collection Pos Info----------------------------
 NumpadEnter::
 	info()
 
@@ -55,7 +62,7 @@ NumpadEnter::
 	MouseGetPos, relXpos, relYpos
 	MsgBox Relative X=%relXpos%    Relatvie Y=%relYpos%`nScreen X=%absXpos%    Screen Y=%absYpos%`nWindow Class=%class%
 Return
-
+*/
 ; --------------------------------------------------------------------
 ; -------------------------Script Controls----------------------------
 ; --------------------------------------------------------------------
